@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="calendarApp">
+    <head>
+        <title>AngularJS Calander SPA</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta charset="UTF-8">
+
+        <!-- load bootstrap and fontawesome via CDN -->
+        
+        <!-- For styling -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+        <style>
+            html, body, input, select, textarea
+            {
+                font-size: 1.05em !important;
+            }
+        </style>
+        
+        <!-- load angular via CDN -->
+        <script src="//code.angularjs.org/1.3.0-rc.2/angular.js"></script>
+        <script src="//code.angularjs.org/1.3.0-rc.2/angular-resource.min.js"></script>
+        <script src="app.js"></script>
+    </head>
+    <body ng-controller = "homeController">
+
+        <header>
+			<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="">AngularJS CalendarApp</a>
+				</div>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+				</ul>
+			</div>
+			</nav>
+		</header>
+
+        <div class="container" >
+<!--            This displays on click toggle functionallity of the panel-->
+            <h6 style="color : red"> Click year to toggle view</h6>
+            
+<!--            First ng-repeat to pick all sales for perticular DATE -->
+            <div ng-repeat = "dateEntry in data" >
+                <div class="row">
+                    <div class="col-md-12" ng-click = 'toggle = !toggle'>
+                         <div class = "panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    {{convertToDate(dateEntry[0].auctionDate.date) | orderBy : 'date.auctionDate.date' | date : 'MMM d, y' }}
+                                </h3>
+                            </div>
+                             
+<!--                             Second ng-repeat to itefate through all entries in selected date -->
+                            <div ng-repeat = "date in dateEntry" ng-show = 'toggle'>
+                                <div class="panel-body"> 
+                                    Facility : {{ date.facility }}<br/>
+                                    Time of Sale : {{convertToTime(date.currentSaleTimeEpoch)}} 
+                                </div>
+                                <hr/>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+		</div>
+
+    </body>
+</html>
