@@ -1,0 +1,23 @@
+<html>
+<head>
+<script>
+function formatPhone(obj) {
+    var numbers = obj.value.replace(/\D/g, ''),
+        char = {0:'(',3:') ',6:' - '};
+    obj.value = '';
+    for (var i = 0; i < numbers.length; ++i) {
+        obj.value += (char[i]||'') + numbers[i];
+        if(i==11)
+        {
+        	var TheTextBox = document.getElementById("textbox");
+TheTextBox.value = TheTextBox.value.substring(0, TheTextBox.length-1);
+        }
+    }
+ 
+}
+</script>
+</head>
+<body>
+<input type="text" id="textbox" name="test" onKeyDown="formatPhone(this);" />
+</body>
+</html>
